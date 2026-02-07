@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For My Valentine 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #ffd6e8;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d88;
+            font-size: 32px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background: #ff4d88;
+            color: white;
+        }
+
+        #noBtn {
+            background: #ccc;
+            color: black;
+            position: absolute;
+        }
+
+        #message {
+            font-size: 22px;
+            color: #ff4d88;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😒</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+    // Cute No messages
+    const noTexts = [
+        "Are you sure? 🥺",
+        "Plss eyyy 😭",
+        "Na bangaram kadhu 💔",
+        "Chudeeeee 😢👉👈",
+        "Osey please 😭💖",
+        "Last chance ra 😭"
+    ];
+
+    let noCount = 0;
+
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    function moveNoButton() {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        noBtn.innerText = noTexts[noCount % noTexts.length];
+        noCount++;
+    }
+
+    yesBtn.addEventListener("click", () => {
+        message.innerHTML = "Yayyy 🥰💖 You just made my heart so happy! 💕";
+        noBtn.style.display = "none";
+        yesBtn.style.display = "none";
+    });
+
+    // Create floating hearts
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "🤍";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 10 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }, 300);
+</script>
+
+</body>
+</html>
